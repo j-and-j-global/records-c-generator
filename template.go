@@ -51,10 +51,12 @@ static inline char* record_track_offset(int line, int start, char *buffer) {
   char *track = tracks[line];
 
   int i = 0;
+  int len = _len(track);
   int max = start + 80;
 
-  if (max > _len(track)) {
-    max = _len(track);
+  if (max > len) {
+    start = len - 80;
+    max = len;
   }
 
   for (int pos = start; pos < max; pos++) {
