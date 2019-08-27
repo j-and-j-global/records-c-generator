@@ -27,7 +27,7 @@ char *tracks[RECORDS_COUNT] = {
   {{ range .Items }}"{{ tracks .Tracks}}",{{ end }}
 };
 
-static inline int _len(*char s) {
+static inline int _len(char *s) {
   int l = 0;
   while(s[l] != '\0') {
     l++;
@@ -78,12 +78,6 @@ var funcMap = template.FuncMap{
 		sA := make([]string, len(tracks))
 
 		for idx, t := range tracks {
-			// Screen is only big enough for 20, and we're not
-			// going to bother writing a pager
-			if idx > 19 {
-				break
-			}
-
 			sA[idx] = fmt.Sprintf(`%s - %s`, t.Track, t.Title)
 		}
 
