@@ -35,21 +35,20 @@ static inline char* record_name(int line) {
   return records[line];
 }
 
-static inline *char record_track_offset(int line, int start, *char buffer) {
+static inline char* record_track_offset(int line, int start, char *buffer) {
   if (line > RECORDS_COUNT) {
     line = RECORDS_COUNT;
   }
 
   char *track = tracks[line];
-  if ((start+80) > sizeof(line) {
-    start = sizeof(line) - 80;
-  }
 
   int i = 0;
-  for (int pos = start, pos < start+80; pos++) {
-    buffer[i] = line[pos];
+  for (int pos = start; pos < (start+80); pos++) {
+    buffer[i] = track[pos];
     i++;
   }
+
+  buffer[i] = '\0';
 
   return buffer;
 }
