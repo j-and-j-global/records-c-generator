@@ -27,6 +27,14 @@ char *tracks[RECORDS_COUNT] = {
   {{ range .Items }}"{{ tracks .Tracks}}",{{ end }}
 };
 
+static inline int _len(*char s) {
+  int l = 0;
+  while(s[l] != '\0') {
+    l++;
+  }
+  return l;
+}
+
 static inline char* record_name(int line) {
   if (line > RECORDS_COUNT) {
     line = RECORDS_COUNT;
@@ -43,7 +51,13 @@ static inline char* record_track_offset(int line, int start, char *buffer) {
   char *track = tracks[line];
 
   int i = 0;
-  for (int pos = start; pos < (start+80); pos++) {
+  int max = start + 80;
+
+  if (max > _len(track)) {
+    max = _len(track);
+  }
+
+  for (int pos = start; pos < max; pos++) {
     buffer[i] = track[pos];
     i++;
   }
