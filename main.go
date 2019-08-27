@@ -59,6 +59,7 @@ func main() {
 		panic(err)
 	}
 
+	aEnd := 0
 	idx := 0
 	for {
 		idx++
@@ -77,12 +78,22 @@ func main() {
 		fmt.Fprintf(os.Stderr, "                                                                                                                                                \r")
 		fmt.Fprintf(os.Stderr, "%d: %q - %q (musicbrainz: %s)\r", idx, m["artist"], m["title"], m["musicbrainz"])
 
+		itemNumber := 0
+		switch m["flight case"] {
+		case "a":
+			aEnd++
+			itemNumber = aEnd
+
+		case "b":
+			itemNumber = idx - aEnd
+		}
+
 		record := Record{
 			Title:       m["title"],
 			Artist:      m["artist"],
 			Tracks:      make([]Track, 0),
-			Case:        m["flight case"],
-			Pos:         idx,
+			Case:        strings.ToUpper(m["flight case"]),
+			Pos:         itemNumber,
 			musicBrainz: m["musicbrainz"],
 		}
 
