@@ -71,6 +71,10 @@ static inline char* record_track_offset(int line, int start, char *buffer) {
 
 var funcMap = template.FuncMap{
 	"tracks": func(tracks []Track) string {
+		if len(tracks) == 0 {
+			return "Track listing unknown for this title"
+		}
+
 		sA := make([]string, len(tracks))
 
 		for idx, t := range tracks {
