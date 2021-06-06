@@ -1,4 +1,4 @@
-module localhost/projects/my-records-app/generator
+module github.com/j-and-j-global/records-c-generator
 
 go 1.12
 
